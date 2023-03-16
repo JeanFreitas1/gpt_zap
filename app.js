@@ -36,7 +36,7 @@ client.on('qr', (qr) => {
 
 client.on('ready', () => {
     console.log('GPT Zap iniciado com sucesso!');
-    console.log(`Version: ${process.env.npm_package_version}`);
+    console.log(`Version: 1.0`);
 })
 
 console.log(users)
@@ -68,10 +68,17 @@ client.on('message', async (message) => {
         messages: [{ role: "user", content: msg }],
         user: "GPT-Zap"
     }
-    const { data } = await axios.post("https://api.openai.com/v1/chat/completions", body, { headers: { Authorization: `Bearer ${api_key}` } })
-    const content = data.choices[0].message.content
-    const response = content.slice(2)
 
-    await client.sendMessage(message.from, response)
+    try {
+        const { data } = await axios.post("https://api.openai.com/v1/chat/completions", body, { headers: { Authorization: `Bearer ${api_key}` } })
+        const content = data.choices[0].message.content
+        const response = content.slice(2)
+        await client.sendMessage(message.from, response)
+
+    } catch (error) {
+        await client.sendMessage(message.from, error)
+    }
+
+
 
 })
