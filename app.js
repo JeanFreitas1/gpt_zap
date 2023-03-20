@@ -74,11 +74,11 @@ client.on('message', async (message) => {
         const content = data.choices[0].message.content
         // const response = content.slice(2)
         await client.sendMessage(message.from, response)
-        print(`${new Date()} - ${message.from}: ${body.slice(0, 40) + "..."}`)
+        console.log(`${new Date()} - ${message.from}: ${body.slice(0, 40) + "..."}`)
 
     } catch (error) {
         await client.sendMessage(message.from, error)
-        print(`error: ${error}`)
+        console.log(`error: ${error}`)
     }
 
 
