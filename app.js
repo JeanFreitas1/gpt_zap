@@ -36,10 +36,10 @@ client.on('qr', (qr) => {
 
 client.on('ready', () => {
     console.log('GPT Zap iniciado com sucesso!');
-    console.log(`Version: 1.0`);
+    console.log(`Version: 1.1`);
 })
 
-console.log(users)
+// console.log(users)
 
 const checkNumber = (number) => {
     const processedNumber = number.split('@')[0];
