@@ -72,11 +72,13 @@ client.on('message', async (message) => {
     try {
         const { data } = await axios.post("https://api.openai.com/v1/chat/completions", body, { headers: { Authorization: `Bearer ${api_key}` } })
         const content = data.choices[0].message.content
-        const response = content.slice(2)
+        // const response = content.slice(2)
         await client.sendMessage(message.from, response)
+        print(`${new Date()} - ${message.from}: ${body.slice(0, 40) + "..."}`)
 
     } catch (error) {
         await client.sendMessage(message.from, error)
+        print(`error: ${error}`)
     }
 
 
